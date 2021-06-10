@@ -1,0 +1,15 @@
+
+.tile{
+    border: none;
+    padding: 100px 100px;
+    margin: 0px 0px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+.tile1 {
+      background: url("images/scissors paper stone.png") no-repeat;
+      margin: 0px;
+  }
+  .tile:hover {
+      background: url("images/scissors paper stone1.png") no-repeat;
+  }

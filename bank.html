@@ -1,0 +1,57 @@
+<!-- style for bank -->
+    <style>
+    input {border-style: none; border-bottom-style: ; border-width:thin;}
+
+    div {border:solid thin black; margin: 1em; padding: 0.5em; border-radius: 0.8em; background: #f7f7f7;}
+    .out {margin: top; width: 200px; background: #FFDC81;position :absolute;;left:1500px}
+
+      @viewport { width: 640;}
+    </style>
+
+    <!-- function for bank(calculate current value) -->
+                <script>
+
+
+                var n1 = (window.location.search.match(/[0-9]+/));
+                var n = Number(n1);
+
+                let current = n;
+
+
+                function NewValue() {
+                  return current;
+                }
+
+
+
+
+              var arr = ["Welcome to SG","CNY","Suspect 1","Rock Scissors Paper","Singing","Chance","Dance","MSL promo vid","Suspect 2","SHN","Motor tour","Arithmetric","Random no.","Special talent","Online Blackjack","Chance","Suspect 3","Category listing","Free pass","Tour around utown","Suspect 4","Chance","Impractical Joke","Negaraku","Charades","Zoom Pose","Choose your suspect","Go Quarantine","1MDB news","Share post","Household items","20 Pushups","Chance","Suspect 5","Guess song","High pitched"];
+
+              var money=[2000,1000,20,1500,800,10,500,1200];
+
+
+
+
+                </script>
+
+                <div class='out'>
+                <div id="control">
+                  <p style="font-family:verdana;text-align:center;">Total Coins</p>
+                </div>
+
+
+                <div id="output">
+                <script>
+                function myFunction(num,moneyindex) {
+                  current = current + money[moneyindex];
+                  document.getElementById("demo").innerHTML = current;
+                }
+
+  				document.write(current);
+
+  				</script>
+        </div>
+
+        </div>
+
+<p id="demo"></p>

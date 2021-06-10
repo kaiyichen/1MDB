@@ -1,0 +1,1086 @@
+<html>
+  <head>
+    <meta charset = "UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    <title> 1MDB Boardgame </title>
+    <meta name="viewport" content="width=480">
+
+<!-- style for buttons -->
+    <style>
+    .button {
+      background-color: #4CAF50; /* Green */
+      position: relative;
+      border: none;
+      color: white;
+      padding: 7px 14px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-family: monospace;
+      font-size: 13px;
+      margin: 2px 1px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
+    .button1 {
+      background-color: white;
+      color: black;
+      border: 4px solid #A07855;
+    }
+
+    .button1:hover {
+      background-color: #A07855;
+      color: white;
+    }
+
+    .button2 {
+      background-color: white;
+      color: black;
+      border: 4px solid #088B25;
+    }
+
+    .button2:hover {
+      background-color: #088B25;
+      color: white;
+    }
+
+    .button3 {
+      background-color: white;
+      color: black;
+      border: 4px solid #ACCDF3;
+    }
+
+    .button3:hover {
+      background-color: #ACCDF3;
+      color: white;
+    }
+
+    .button4 {
+      background-color: white;
+      color: black;
+      border: 4px solid #EA8713;
+    }
+
+    .button4:hover {
+      background-color: #EA8713;
+      color: white;
+    }
+
+    .button5 {
+      background-color: white;
+      color: black;
+      border: 4px solid #EA1313;
+    }
+
+    .button5:hover {
+      background-color: #EA1313;
+      color: white;
+    }
+
+
+    </style>
+
+
+
+
+<!-- style for dice -->
+    <style>
+    input {border-style: none; border-bottom-style: solid; border-width:thin;}
+
+    div {border:solid thin black; margin: 0.5em; padding: 0.5em; border-radius: 1em; background: #f7f7f7;}
+
+    .die {border:solid thin black; margin: 1px; padding: 1px; border-radius: 5px; display: inline-block;}
+
+    .outer {margin: top; width: 200px; background: lightblue;position:absolute; left:20px;top:400px; }
+
+    @viewport { width: 640;}
+
+    </style>
+
+
+
+<!-- function for dice -->
+
+    <script>
+
+      var dieFace = {
+        6:'<svg width="50" height="50"><polygon points="3,3 3,47 47,47 47,3" style="stroke: black; fill: none" /><text fill="black" x="20" y="30" font-family="Verdana" font-size="18">REPLACEME</text></svg>',
+        };
+
+      function rollem(){
+        total = 0;
+        n = 2;
+        d = 6;
+        o = document.getElementById('output');
+      p = o.innerHTML;
+
+      if (d in dieFace){
+        face = dieFace[d];
+        } else {
+          face = dieFace['other'];
+        }
+
+        if (p != ''){
+            p = p.concat("<hr>")
+        } else {
+            p = p.concat('<button id="clear" onclick="clearme()" style="float:right;">Clear</button>');
+        }
+        for (i = 0; i < n; i++){
+        r = Math.ceil(Math.random() * d);
+        total += r;
+            p = p.concat("<span> " + face.replace('REPLACEME', r.toString()) + " </span>");
+        }
+        p += " Total: " + total;
+        o.innerHTML = p;
+      }
+
+      function clearme(){
+        o = document.getElementById('output');
+        o.innerHTML = "";
+      }
+
+      function loady(){
+          for(f in dieFace){
+            e = document.getElementById(f);
+          if (e) e.innerHTML = dieFace[f].replace("REPLACEME", f);
+        }
+      }
+
+      function dieClick(whatzis){
+        n = document.getElementById('num');
+        d = document.getElementById('die');
+        if (whatzis.id == d.value){
+          n.value = Number(n.value) + 1;
+        } else {
+          n.value = 1;
+          d.value = whatzis.id
+        }
+      }
+    </script>
+  </head>
+
+
+<!-- BODY -->
+  <body style= "background-color: FFF4EA">
+    <!-- outerboard -->
+    <img width= "1430" src = "images/outerboardd.png" style = "position: absolute; left: 230px; top: 176px">
+    <!-- dice -->
+
+            <body onload=loady()>
+            <div class='outer'>
+              <div id="control">
+
+              <button id="roll" onclick="rollem()">Roll</button>
+              </div>
+
+
+            <span id="4" onclick="dieClick(this)">
+            </span>
+            <span id="6" onclick="dieClick(this)">
+            </span>
+            <span id="8" onclick="dieClick(this)">
+            </span>
+            <span id="10" onclick="dieClick(this)">
+            </span>
+            <span id="12" onclick="dieClick(this)">
+            </span>
+            <span id="20" onclick="dieClick(this)">
+            </span>
+
+              <div id="output"></div>
+              </div>
+
+  <!-- function for bank(calculate current value) -->
+              <script>
+
+
+              var n1 = (window.location.search.match(/[0-9]+/));
+              var n = Number(n1);
+
+              let current = n;
+
+
+              function NewValue() {
+                return current;
+              }
+
+
+
+
+            var arr = ["Welcome to SG","Happy Chinese New Year","Interview Suspect 1","Rock Scissors Paper","Singing","Chance","Dance","MSL promo vid","Suspect 2","SHN","Tour on motor","Arithmetric","Random no.generator","Special talent","Online Blackjack","Chance","Suspect 3","Category listing","Free pass","Tour around utown","Interview Suspect 4","Chance","Impractical Joke","Negaraku","Charades","Zoom Pose","Choose your suspect","Go to Quarantine","1MDB news","Share post","Household items","20 Pushups","Chance","Suspect 5","Guess song","High pitched","Earn 2000","Earn 1000","Earn 500","Lose 2000","Lose 1000","Lose 500"];
+
+            var money=[2000,1000,20,1500,800,10,500,1200,-2000,-1000,-500];
+
+
+
+
+              </script>
+
+                <p style="font-family:verdana;text-align:center; position: absolute ;">Total Coins</p>
+
+                <br>
+              </br>
+
+
+              <script>
+              function myFunction(num,moneyindex) {
+                current = current + money[moneyindex];
+                document.getElementById("demo").innerHTML = current + " " + arr[num];
+              }
+
+				       </script>
+
+
+
+<p id="demo"></p>
+
+
+
+
+<!-- table for buttons -->
+
+
+              <p id="demo"></p>
+
+
+  <table>
+    <tr>
+      <td>
+              <button onclick="myFunction(0,0)" class="button button1" style = "position: absolute; left: 475px; top: 120px" >+2000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(1,1)" class="button button2" style = "position: absolute; left: 585px; top: 120px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(3,2)" class="button button4" style = "position: absolute; left: 760px; top: 120px" >+20/win </button>
+      </td>
+      <td>
+              <button onclick="myFunction(4,1)" class="button button5" style = "position: absolute; left: 865px; top: 120px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(6,3)" class="button button5" style = "position: absolute; left: 1045px; top: 120px" >+1500 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(7,1)" class="button button2" style = "position: absolute; left: 1135px; top: 120px" >+1000 </button>
+      </td>
+
+    </tr>
+    <tr>
+      <td>
+              <button onclick="myFunction(35,1)" class="button button2" style = "position: absolute; left: 340px; top: 340px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(10,1)" class="button button2" style = "position: absolute; left: 1470px; top: 340px" >+1000 </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+              <button onclick="myFunction(34,2)" class="button button4" style = "position: absolute; left: 330px; top: 430px" >+20/win </button>
+      </td>
+      <td>
+              <button onclick="myFunction(11,2)" class="button button4" style = "position: absolute; left: 1470px; top: 430px" >+20/song </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+              <button onclick="myFunction(13,4)" class="button button5" style = "position: absolute; left: 1470px; top: 610px" >+800 </button>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+              <button onclick="myFunction(31,7)" class="button button5" style = "position: absolute; left: 340px; top: 700px" >+1200 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(14,2)" class="button button4" style = "position: absolute; left: 1470px; top: 700px" >+20/win </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+              <button onclick="myFunction(30,2)" class="button button4" style = "position: absolute; left: 320px; top: 792px" >+20/item </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+              <button onclick="myFunction(29,0)" class="button button5" style = "position: absolute; left: 340px; top: 884px" >+2000 </button>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+              <button onclick="myFunction(28,1)" class="button button2" style = "position: absolute; left: 340px; top: 976px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(17,5)" class="button button4" style = "position: absolute; left: 1470px; top: 976px" >+10/item </button>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+              <button onclick="myFunction(25,6)" class="button button5" style = "position: absolute; left: 680px; top: 1200px" >+500 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(24,2)" class="button button4" style = "position: absolute; left: 766px; top: 1200px" >+20/word </button>
+      </td>
+      <td>
+              <button onclick="myFunction(23,1)" class="button button2" style = "position: absolute; left: 868px; top: 1200px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(22,1)" class="button button5" style = "position: absolute; left: 950px; top: 1200px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(19,1)" class="button button2" style = "position: absolute; left: 1235px; top: 1200px" >+1000 </button>
+      </td>
+
+    </tr>
+
+
+    <tr>
+      <td>
+              <button onclick="myFunction(36,0)" class="button button3" style = "position: absolute; left: 20px; top: 200px" >+2000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(37,1)" class="button button3" style = "position: absolute; left: 100px; top: 200px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(38,6)" class="button button3" style = "position: absolute; left: 180px; top: 200px" >+500 </button>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+              <button onclick="myFunction(39,8)" class="button button3" style = "position: absolute; left: 20px; top: 250px" >-2000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(40,9)" class="button button3" style = "position: absolute; left: 100px; top: 250px" >-1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(41,10)" class="button button3" style = "position: absolute; left: 180px; top: 250px" >-500 </button>
+      </td>
+    </tr>
+
+
+
+
+  </table>
+
+<!-- table for radio button -->
+    <table>
+  <tr>
+
+   <td>
+      <label class="container">
+    <input type="radio" name="radio" checked style="position:absolute ;top:80px ;left:474px; height: 30px; width: 70px;"">
+    <span class= "check""> </span>
+  </label>
+</td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:582px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:675px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:767px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:859px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:951px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:1043px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:1135px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:1227px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:80px ;left:1319px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <!-- row2 and 4 radio button -->
+  <tr>
+    <td>
+       <label class="container">
+     <input type="radio" name="radio" checked style="position:absolute ;top:340px ;left:250px; height: 30px; width: 70px;"">
+     <span class= "check""> </span>
+   </label>
+   </td>
+
+   <td>
+      <label class="container">
+    <input type="radio" name="radio" checked style="position:absolute ;top:340px ;left:1550px; height: 30px; width: 70px;"">
+    <span class= "check""> </span>
+  </label>
+  </td>
+
+</tr>
+
+<tr>
+  <td>
+     <label class="container">
+   <input type="radio" name="radio" checked style="position:absolute ;top:432px ;left:250px; height: 30px; width: 70px;"">
+   <span class= "check""> </span>
+ </label>
+ </td>
+
+ <td>
+    <label class="container">
+  <input type="radio" name="radio" checked style="position:absolute ;top:432px ;left:1550px; height: 30px; width: 70px;"">
+  <span class= "check""> </span>
+</label>
+</td>
+
+</tr>
+
+<tr>
+  <td>
+     <label class="container">
+   <input type="radio" name="radio" checked style="position:absolute ;top:524px ;left:250px; height: 30px; width: 70px;"">
+   <span class= "check""> </span>
+ </label>
+ </td>
+
+ <td>
+    <label class="container">
+  <input type="radio" name="radio" checked style="position:absolute ;top:524px ;left:1550px; height: 30px; width: 70px;"">
+  <span class= "check""> </span>
+</label>
+</td>
+
+</tr>
+
+<tr>
+  <td>
+     <label class="container">
+   <input type="radio" name="radio" checked style="position:absolute ;top:616px ;left:250px; height: 30px; width: 70px;"">
+   <span class= "check""> </span>
+ </label>
+ </td>
+
+ <td>
+    <label class="container">
+  <input type="radio" name="radio" checked style="position:absolute ;top:616px ;left:1550px; height: 30px; width: 70px;"">
+  <span class= "check""> </span>
+</label>
+</td>
+
+</tr>
+
+<tr>
+  <td>
+     <label class="container">
+   <input type="radio" name="radio" checked style="position:absolute ;top:708px ;left:250px; height: 30px; width: 70px;"">
+   <span class= "check""> </span>
+ </label>
+ </td>
+
+ <td>
+    <label class="container">
+  <input type="radio" name="radio" checked style="position:absolute ;top:708px ;left:1550px; height: 30px; width: 70px;"">
+  <span class= "check""> </span>
+</label>
+</td>
+
+</tr>
+
+<tr>
+  <td>
+     <label class="container">
+   <input type="radio" name="radio" checked style="position:absolute ;top:800px ;left:250px; height: 30px; width: 70px;"">
+   <span class= "check""> </span>
+ </label>
+ </td>
+
+ <td>
+    <label class="container">
+  <input type="radio" name="radio" checked style="position:absolute ;top:800px ;left:1550px; height: 30px; width: 70px;"">
+  <span class= "check""> </span>
+</label>
+</td>
+
+</tr>
+
+<tr>
+  <td>
+     <label class="container">
+   <input type="radio" name="radio" checked style="position:absolute ;top:892px ;left:250px; height: 30px; width: 70px;"">
+   <span class= "check""> </span>
+ </label>
+ </td>
+
+ <td>
+    <label class="container">
+  <input type="radio" name="radio" checked style="position:absolute ;top:892px ;left:1550px; height: 30px; width: 70px;"">
+  <span class= "check""> </span>
+</label>
+</td>
+
+</tr>
+
+<tr>
+  <td>
+     <label class="container">
+   <input type="radio" name="radio" checked style="position:absolute ;top:984px ;left:250px; height: 30px; width: 70px;"">
+   <span class= "check""> </span>
+ </label>
+ </td>
+
+ <td>
+    <label class="container">
+  <input type="radio" name="radio" checked style="position:absolute ;top:984px ;left:1550px; height: 30px; width: 70px;"">
+  <span class= "check""> </span>
+</label>
+</td>
+
+</tr>
+
+<!-- row3 radio button -->
+  <tr>
+
+   <td>
+      <label class="container">
+    <input type="radio" name="radio" checked style="position:absolute ;top:1260px ;left:485px; height: 30px; width: 70px;"">
+    <span class= "check""> </span>
+  </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:577px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:669px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:761px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:853px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:945px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:1037px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:1129px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:1221px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  <td>
+    <label class="container">
+      <input type="radio" name="radio" style="position:absolute ;top:1260px ;left:1340px; height: 30px; width: 70px;"">
+      <span class= "check""> </span>
+    </label>
+  </td>
+
+  </table>
+
+
+<!-- style for board element -->
+  <style>
+
+  .bigtile{
+      border: none;
+      padding: 50px 50px;
+      margin: 0px 0px;
+      transition-duration: 0.2s;
+      cursor: pointer;
+  }
+  .bigtile1 {
+        background: url("images/Welcome to SG.png") no-repeat;
+        margin: 0px;
+    }
+    .bigtile:hover {
+        background: url("images/Welcome to SG1.png") no-repeat;
+    }
+    .shntile {
+          background: url("images/SHN.png") no-repeat;
+          margin: 0px;
+      }
+      .shntile:hover {
+          background: url("images/SHN1.png") no-repeat;
+      }
+      .quarantinetile {
+            background: url("images/Go to Quarantine.png") no-repeat;
+            margin: 0px;
+        }
+        .quarantinetile:hover {
+            background: url("images/Go to Quarantine1.png") no-repeat;
+        }
+        .freepasstile {
+              background: url("images/Free pass.png") no-repeat;
+              margin: 0px;
+          }
+          .freepasstile:hover {
+              background: url("images/Free pass1.png") no-repeat;
+          }
+
+
+
+</style>
+
+<style>
+.tile{
+    border: none;
+    padding: 50px 30px;
+    margin: 0px 0px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+.tile1 {
+      background: url("images/scissors paper stone.png") no-repeat;
+      margin: 0px;
+  }
+  .tile:hover {
+      background: url("images/scissors paper stone1.png") no-repeat;
+  }
+  .singtile {
+        background: url("images/Singing.png") no-repeat;
+        margin: 0px;
+    }
+    .singtile:hover {
+        background: url("images/Singing1.png") no-repeat;
+    }
+    .dancetile {
+          background: url("images/Dance.png") no-repeat;
+          margin: 0px;
+      }
+      .dancetile:hover {
+          background: url("images/Dance1.png") no-repeat;
+      }
+      .guesssongtile {
+            background: url("images/Guess the song.png") no-repeat;
+            margin: 0px;
+        }
+        .guesssongtile:hover {
+            background: url("images/Guess the song1.png") no-repeat;
+        }
+        .mathtile {
+              background: url("images/Arithmetric.png") no-repeat;
+              margin: 0px;
+          }
+          .mathtile:hover {
+              background: url("images/Arithmetric1.png") no-repeat;
+          }
+          .talenttile {
+                background: url("images/Special talent.png") no-repeat;
+                margin: 0px;
+            }
+            .talenttile:hover {
+                background: url("images/Special talent1.png") no-repeat;
+            }
+            .pushuptile {
+                  background: url("images/20 Pushups.png") no-repeat;
+                  margin: 0px;
+              }
+              .pushuptile:hover {
+                  background: url("images/20 Pushups1.png") no-repeat;
+              }
+              .BJtile {
+                    background: url("images/Online blackjack.png") no-repeat;
+                    margin: 0px;
+                }
+                .BJtile:hover {
+                    background: url("images/Online blackjack1.png") no-repeat;
+                }
+                .housetile {
+                      background: url("images/Find the household item.png") no-repeat;
+                      margin: 0px;
+                  }
+                  .housetile:hover {
+                      background: url("images/Find the household item1.png") no-repeat;
+                  }
+                  .sharetile {
+                        background: url("images/post promo vid.png") no-repeat;
+                        margin: 0px;
+                    }
+                    .sharetile:hover {
+                        background: url("images/post promo vid1.png") no-repeat;
+                    }
+                    .listtile {
+                          background: url("images/Category listing.png") no-repeat;
+                          margin: 0px;
+                      }
+                      .listtile:hover {
+                          background: url("images/Category listing1.png") no-repeat;
+                      }
+                      .zoomtile {
+                            background: url("images/Zoom pose.png") no-repeat;
+                            margin: 0px;
+                        }
+                        .zoomtile:hover {
+                            background: url("images/Zoom pose1.png") no-repeat;
+                        }
+                        .charadestile {
+                              background: url("images/Charades.png") no-repeat;
+                              margin: 0px;
+                          }
+                          .charadestile:hover {
+                              background: url("images/Charades1.png") no-repeat;
+                          }
+                          .joketile {
+                                background: url("images/Impractical Joke.png") no-repeat;
+                                margin: 0px;
+                            }
+                            .joketile:hover {
+                                background: url("images/Impractical Joke1.png") no-repeat;
+                            }
+
+
+
+
+
+
+
+
+
+
+</style>
+
+<!-- board element -->
+    <table id= "board">
+      <tr>
+        <td>
+            <div type="image" class=" bigtile bigtile1 bigtile1.hover"
+            style ="position: absolute;
+            top: 180px; left:440px; width: 50px; height: 50px""> </div>
+        </td>
+
+        <td>
+          <a href = "#" target="_blank">
+            <img width = "100px" src= "images/CNY.png" style ="position: absolute;
+            top: 180px; left:576px; width: 92px;"/>
+
+        </td>
+
+        <td>
+            <input type="image" name="Suspect 1"
+           src= "images/Suspect 1.png" style ="position: absolute;
+            top: 180px; left:668px; width: 92px;"">
+        </td>
+
+        <td>
+            <div type="image" class=" tile tile1 tile.hover"
+            style ="position: absolute;
+            top: 180px; left:760px; width: 50px; height: 50px""> </div>
+        </td>
+
+        <td>
+          <div type="image" class=" tile singtile singtile.hover"
+          style ="position: absolute;
+          top: 180px; left:850px; width: 50px; height: 50px""> </div>
+        </td>
+
+        <td>
+          <a href = "
+https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] , Free puzzle hunt hints [+1 hint],Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
+            <img width = "100px" src= "images/Chance 1.png" style ="position: absolute;
+            top: 180px; left:942px; width: 92px;"/>
+
+        </td>
+
+        <td>
+          <div type="image" class=" tile dancetile dancetile.hover"
+          style ="position: absolute;
+          top: 180px; left:1033px; width: 50px; height: 50px""> </div>
+        </td>
+
+
+        <td>
+          <a href = "#" target="_blank">
+            <img width = "100px" src= "images/MSL promo vid.png" style ="position: absolute;
+             top:180px; left:1125px; width: 92px;"/>
+
+        </td>
+
+        <td>
+            <input type="image" name="Suspect 2"
+           src= "images/Suspect 2.png" style ="position: absolute;
+            top:180px; left:1217px; width: 92px;"">
+        </td>
+
+        <td>
+          <div type="image" class=" bigtile shntile shntile.hover"
+          style ="position: absolute;
+          top: 180px; left:1310px; width: 50px; height: 50px""> </div>
+        </td>
+      </tr>
+
+
+
+      <tr>
+        <td>
+          <a href = "https://www.youtube.com/watch?v=GXLBNJUOU5w" target="_blank">
+            <img width = "100px" src= "images/High pitched.png" style ="position: absolute;
+             top:316px; left:441px; width: 135px;"/>
+          </a>
+        </td>
+
+        <td>
+          <a href = "https://www.youtube.com/watch?v=GXLBNJUOU5w" target="_blank">
+            <img width = "100px" src= "images/Motor tour.png" style ="position: absolute;
+             top:316px; left:1312px; width: 135px;"/>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div type="image" class=" tile guesssongtile guesssongtile.hover"
+          style ="position: absolute;
+          top: 408px; left:441px; width: 80px; height: 50px""> </div>
+
+
+
+        <td>
+          <div type="image" class=" tile mathtile mathtile.hover"
+          style ="position: absolute;
+          top: 408px; left:1312px; width: 80px; height: 50px""> </div>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+            <input type="image" name="Suspect 5"
+           src= "images/Suspect 5.png" style ="position: absolute;
+            top:500px; left:441px; width: 135px;"">
+        </td>
+
+        <td>
+            <input type="image" name="Random Generator Suspect"
+           src= "images/Random Generator Suspect.png" style ="position: absolute;
+            top:500px; left:1312px; width: 135px;"">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <a href = "
+https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] , Free puzzle hunt hints [+1 hint],Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
+            <img width = "100px" src= "images/Chance 4.png" style ="position: absolute;
+            top: 590px; left:441px; width: 135px;"/>
+
+        </td>
+
+
+        <td>
+          <div type="image" class=" tile talenttile talenttile.hover"
+          style ="position: absolute;
+          top: 590px; left:1312px; width: 80px; height: 50px""> </div>
+
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          <div type="image" class=" tile pushuptile pushuptile.hover"
+          style ="position: absolute;
+          top: 680px; left:441px; width: 80px; height: 50px""> </div>
+
+        </td>
+
+        <td>
+          <div type="image" class=" tile BJtile BJtile.hover"
+          style ="position: absolute;
+          top: 680px; left:1312px; width: 80px; height: 50px""> </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div type="image" class=" tile housetile housetile.hover"
+          style ="position: absolute;
+          top: 770px; left:441px; width: 80px; height: 50px""> </div>
+        </td>
+
+        <td>
+          <a href = "
+        https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] , Free puzzle hunt hints [+1 hint],Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
+            <img width = "100px" src= "images/Chance 2.png" style ="position: absolute;
+            top: 770px; left:1312px; width: 135px;"/>
+
+        </td>
+
+      </tr>
+
+      <tr>
+        <td>
+          <div type="image" class=" tile sharetile sharetile.hover"
+          style ="position: absolute;
+          top: 863px; left:441px; width: 80px; height: 50px""> </div>
+
+
+        </td>
+
+        <td>
+            <input type="image" name="Suspect 3"
+           src= "images/Suspect 3.png" style ="position: absolute;
+            top:863px; left:1312px; width: 135px;"">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <a href = "https://www.youtube.com/watch?v=1ePFLkf0KMw" target="_blank">
+            <img width = "100px" src= "images/IMDB spread around.png" style ="position: absolute;
+             top:955px; left:441px; width: 135px;"/>
+          </a>
+        </td>
+
+        <td>
+          <div type="image" class=" tile listtile listtile.hover"
+          style ="position: absolute;
+          top: 955px; left:1312px; width: 80px; height: 50px""> </div>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div type="image" class=" bigtile quarantinetile quarantinetile.hover"
+          style ="position: absolute;
+          top: 1047px; left:440px; width: 50px; height: 50px""> </div>
+
+        </td>
+
+        <td>
+            <input type="image" name="Choose your suspect"
+           src= "images/Choose your suspect.png" style ="position: absolute;
+            top:1047px; left:578px; width: 92px;"">
+        </td>
+
+        <td>
+          <div type="image" class=" tile zoomtile zoomtile.hover"
+          style ="position: absolute;
+          top: 1047px; left:670px; width: 80px; height: 50px""> </div>
+        </td>
+
+        <td>
+          <div type="image" class=" tile charadestile charadestile.hover"
+          style ="position: absolute;
+          top: 1047px; left:762px; width: 80px; height: 50px""> </div>
+        </td>
+
+        <td>
+          <a href = "https://www.youtube.com/watch?v=g0moet-jLw8 " target="_blank">
+            <img width = "100px" src= "images/Negaraku.png" style ="position: absolute;
+             top:1047px; left:854px; width: 92px;"/>
+        </td>
+
+        <td>
+          <div type="image" class=" tile joketile joketile.hover"
+          style ="position: absolute;
+          top: 1047px; left:946px; width: 80px; height: 50px""> </div>
+        </td>
+        <td>
+          <a href = "
+        https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] , Free puzzle hunt hints [+1 hint],Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
+            <img width = "100px" src= "images/Chance 3.png" style ="position: absolute;
+            top: 1047px; left:1038px; width: 92px;"/>
+
+        </td>
+
+        <td>
+            <input type="image" name="Suspect 4"
+           src= "images/Suspect 4.png" style ="position: absolute;
+            top:1047px; left:1130px; width: 92px;">
+        </td>
+
+        <td>
+          <a href = "#" target="_blank">
+            <img width = "100px" src= "images/Tour around Utown.png" style ="position: absolute;
+             top:1047px; left:1222px; width: 92px;"/>
+        </td>
+
+        <td>
+          <div type="image" class=" bigtile freepasstile freepasstile.hover"
+          style ="position: absolute;
+          top: 1047px; left:1314px; width: 50px; height: 50px""> </div>
+        </td>
+      </tr>
+
+      <body onload=loady()>
+
+
+
+
+
+  </body>

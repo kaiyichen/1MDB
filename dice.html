@@ -1,0 +1,107 @@
+<html><head>
+
+<meta name="viewport" content="width=480">
+
+<style>
+input {border-style: none; border-bottom-style: solid; border-width:thin;}
+
+div {border:solid thin black; margin: 0.5em; padding: 0.5em; border-radius: 1em; background: #f7f7f7;}
+
+.die {border:solid thin black; margin: 1px; padding: 1px; border-radius: 5px; display: inline-block;}
+
+.outer {margin: top; width: 200px; background: lightblue;position:relative}
+
+@viewport { width: 640;}
+
+</style>
+
+
+
+
+<script>
+
+  var dieFace = {
+    6:'<svg width="50" height="50"><polygon points="3,3 3,47 47,47 47,3" style="stroke: black; fill: none" /><text fill="black" x="20" y="30" font-family="Verdana" font-size="18">REPLACEME</text></svg>',
+    };
+
+  function rollem(){
+    total = 0;
+    n = 2;
+    d = 6;
+    o = document.getElementById('output');
+  p = o.innerHTML;
+
+  if (d in dieFace){
+    face = dieFace[d];
+    } else {
+      face = dieFace['other'];
+    }
+
+    if (p != ''){
+        p = p.concat("<hr>")
+    } else {
+        p = p.concat('<button id="clear" onclick="clearme()" style="float:right;">Clear</button>');
+    }
+    for (i = 0; i < n; i++){
+    r = Math.ceil(Math.random() * d);
+    total += r;
+        p = p.concat("<span> " + face.replace('REPLACEME', r.toString()) + " </span>");
+    }
+    p += " Total: " + total;
+    o.innerHTML = p;
+  }
+
+  function clearme(){
+    o = document.getElementById('output');
+    o.innerHTML = "";
+  }
+
+  function loady(){
+      for(f in dieFace){
+        e = document.getElementById(f);
+      if (e) e.innerHTML = dieFace[f].replace("REPLACEME", f);
+    }
+  }
+
+  function dieClick(whatzis){
+    n = document.getElementById('num');
+    d = document.getElementById('die');
+    if (whatzis.id == d.value){
+      n.value = Number(n.value) + 1;
+    } else {
+      n.value = 1;
+      d.value = whatzis.id
+    }
+  }
+</script>
+</head>
+
+
+
+
+<body onload=loady()>
+<div class='outer'>
+  <div id="control">
+
+  <button id="roll" onclick="rollem()">Roll</button>
+  </div>
+
+
+<span id="4" onclick="dieClick(this)">
+</span>
+<span id="6" onclick="dieClick(this)">
+</span>
+<span id="8" onclick="dieClick(this)">
+</span>
+<span id="10" onclick="dieClick(this)">
+</span>
+<span id="12" onclick="dieClick(this)">
+</span>
+<span id="20" onclick="dieClick(this)">
+</span>
+
+  <div id="output"></div>
+  </div>
+</body>
+
+</html>

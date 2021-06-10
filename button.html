@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+
+<body>
+<button onclick="myFunction(10)" class="button button1">Click me</button>
+
+<p id="demo"></p>
+
+<script>
+var arr = ["Welcome to SG","CNY","Suspect 1","Rock Scissors Paper","Singing","Chance","Dance","MSL promo vid","Suspect 2","SHN","Motor tour","Arithmetric","Random no.","Special talent","Online Blackjack","Chance","Suspect 3","Category listing","Free pass","Tour around utown","Suspect 4","Chance","Impractical Joke","Negaraku","Charades","Zoom Pose","Choose your suspect","Go Quarantine","1MDB news","Share post","Household items","20 Pushups","Chance","Suspect 5","Guess song","High pitched"];
+
+function myFunction(num) {
+  document.getElementById("demo").innerHTML = arr[num];
+}
+</script>
+
+</body>
+</html>
