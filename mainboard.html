@@ -93,7 +93,7 @@
 
     .die {border:solid thin black; margin: 1px; padding: 1px; border-radius: 5px; display: inline-block;}
 
-    .outer {margin: top; width: 200px; background: lightblue;position:absolute; left:20px;top:400px; }
+    .outer {margin: top; width: 200px; background: lightblue;position:absolute;top:250px; }
 
     @viewport { width: 640;}
 
@@ -193,6 +193,47 @@
               </div>
 
   <!-- function for bank(calculate current value) -->
+
+  <style>
+    input {border-style: none; border-bottom-style: solid; border-width:thin;}
+
+    div {border:solid thin black; margin: 0.5em; padding: 0.5em; border-radius: 1em; background: #f7f7f7;}
+
+    .totalcoins {border:solid thin black; margin: 1px; padding: 1px; border-radius: 5px; display: inline-block;}
+
+    .bank {margin: top; width: 200px; background: #FFDC81;position:absolute; }
+
+    @viewport { width: 640;}
+
+    </style>
+
+    <div class='bank'>
+
+            <p style="font-family:verdana;text-align:center;font-size:20px">Total Coins</p>
+              <div id="totalc">
+                <script>
+                function NewValue(moneyindex) {
+                  current = current + money[moneyindex];
+                    document.getElementById("totalc").innerHTML =  current;
+                }
+                </script>
+             </div>
+
+              <p style="font-family:verdana;text-align:center;font-size:20px">History</p>
+
+              <div id='history'>
+                <script>
+
+                  function myFunction(num,moneyindex) {
+                    NewValue(moneyindex);
+                    document.getElementById("history").innerHTML =  arr[num];
+                  }
+
+
+                  </script>
+              </div>
+              </div>
+
               <script>
 
 
@@ -202,33 +243,19 @@
               let current = n;
 
 
-              function NewValue() {
-                return current;
-              }
 
 
 
 
-            var arr = ["Welcome to SG","Happy Chinese New Year","Interview Suspect 1","Rock Scissors Paper","Singing","Chance","Dance","MSL promo vid","Suspect 2","SHN","Tour on motor","Arithmetric","Random no.generator","Special talent","Online Blackjack","Chance","Suspect 3","Category listing","Free pass","Tour around utown","Interview Suspect 4","Chance","Impractical Joke","Negaraku","Charades","Zoom Pose","Choose your suspect","Go to Quarantine","1MDB news","Share post","Household items","20 Pushups","Chance","Suspect 5","Guess song","High pitched","Earn 2000","Earn 1000","Earn 500","Lose 2000","Lose 1000","Lose 500"];
+
+            var arr = ["Welcome to SG","Happy Chinese New Year","Interview Suspect 1","Rock Scissors Paper","Singing","Chance","Dance","MSL promo vid","Suspect 2","SHN","Tour on motor","Arithmetric","Random no.generator","Special talent","Online Blackjack","Chance","Suspect 3","Category listing","Free pass","Tour around utown","Interview Suspect 4","Chance","Impractical Joke","Negaraku","Charades","Zoom Pose","Choose your suspect","Go to Quarantine","1MDB news","Share post","Household items","20 Pushups","Chance","Suspect 5","Guess song","High pitched","Chance - Earn 2000","Chance - Earn 1000","Chance - Earn 500","Chance - Lose 2000","Chance - Lose 1000","Chance - Lose 500"];
 
             var money=[2000,1000,20,1500,800,10,500,1200,-2000,-1000,-500];
 
 
 
 
-              </script>
 
-                <p style="font-family:verdana;text-align:center; position: absolute ;">Total Coins</p>
-
-                <br>
-              </br>
-
-
-              <script>
-              function myFunction(num,moneyindex) {
-                current = current + money[moneyindex];
-                document.getElementById("demo").innerHTML = current + " " + arr[num];
-              }
 
 				       </script>
 
@@ -248,7 +275,7 @@
   <table>
     <tr>
       <td>
-              <button onclick="myFunction(0,0)" class="button button1" style = "position: absolute; left: 475px; top: 120px" >+2000 </button>
+              <button onclick="myFunction(0,0) " class="button button1" style = "position: absolute; left: 475px; top: 120px" >+2000 </button>
       </td>
       <td>
               <button onclick="myFunction(1,1)" class="button button2" style = "position: absolute; left: 585px; top: 120px" >+1000 </button>
@@ -336,28 +363,38 @@
 
     </tr>
 
-
+<!-- chance button -->
+<style>
+chance {
+  color: #619EE4;
+  text-indent: 100px;
+  font-size:30px;
+  text-transform: uppercase;
+  position: absolute ;left:1600px; top:150px;
+}
+</style>
+<chance> Chance </chance>
     <tr>
       <td>
-              <button onclick="myFunction(36,0)" class="button button3" style = "position: absolute; left: 20px; top: 200px" >+2000 </button>
+              <button onclick="myFunction(36,0)" class="button button3" style = "position: absolute; left: 1700px; top: 200px" >+2000 </button>
       </td>
       <td>
-              <button onclick="myFunction(37,1)" class="button button3" style = "position: absolute; left: 100px; top: 200px" >+1000 </button>
+              <button onclick="myFunction(37,1)" class="button button3" style = "position: absolute; left: 1800px; top: 200px" >+1000 </button>
       </td>
       <td>
-              <button onclick="myFunction(38,6)" class="button button3" style = "position: absolute; left: 180px; top: 200px" >+500 </button>
+              <button onclick="myFunction(38,6)" class="button button3" style = "position: absolute; left: 1900px; top: 200px" >+500 </button>
       </td>
     </tr>
 
     <tr>
       <td>
-              <button onclick="myFunction(39,8)" class="button button3" style = "position: absolute; left: 20px; top: 250px" >-2000 </button>
+              <button onclick="myFunction(39,8)" class="button button3" style = "position: absolute; left: 1700px; top: 250px" >-2000 </button>
       </td>
       <td>
-              <button onclick="myFunction(40,9)" class="button button3" style = "position: absolute; left: 100px; top: 250px" >-1000 </button>
+              <button onclick="myFunction(40,9)" class="button button3" style = "position: absolute; left: 1800px; top: 250px" >-1000 </button>
       </td>
       <td>
-              <button onclick="myFunction(41,10)" class="button button3" style = "position: absolute; left: 180px; top: 250px" >-500 </button>
+              <button onclick="myFunction(41,10)" class="button button3" style = "position: absolute; left: 1900px; top: 250px" >-500 </button>
       </td>
     </tr>
 
@@ -843,6 +880,7 @@
         </td>
 
         <td>
+          <a href = "sing.html" target="_blank">
           <div type="image" class=" tile singtile singtile.hover"
           style ="position: absolute;
           top: 180px; left:850px; width: 50px; height: 50px""> </div>
@@ -857,6 +895,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
+          <a href = "dance.html" target="_blank">
           <div type="image" class=" tile dancetile dancetile.hover"
           style ="position: absolute;
           top: 180px; left:1033px; width: 50px; height: 50px""> </div>
@@ -909,6 +948,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
 
 
         <td>
+          <a href = "https://mathsbot.com/questionGenerator" target="_blank">
           <div type="image" class=" tile mathtile mathtile.hover"
           style ="position: absolute;
           top: 408px; left:1312px; width: 80px; height: 50px""> </div>
@@ -966,6 +1006,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
 
       <tr>
         <td>
+          <a href = "household_items.html" target="_blank">
           <div type="image" class=" tile housetile housetile.hover"
           style ="position: absolute;
           top: 770px; left:441px; width: 80px; height: 50px""> </div>
@@ -1006,6 +1047,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
+            <a href = "category_listing.html" target="_blank">
           <div type="image" class=" tile listtile listtile.hover"
           style ="position: absolute;
           top: 955px; left:1312px; width: 80px; height: 50px""> </div>
@@ -1034,6 +1076,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
+            <a href = "charades.html" target="_blank">
           <div type="image" class=" tile charadestile charadestile.hover"
           style ="position: absolute;
           top: 1047px; left:762px; width: 80px; height: 50px""> </div>
