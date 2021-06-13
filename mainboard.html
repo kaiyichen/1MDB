@@ -93,7 +93,7 @@
 
     .die {border:solid thin black; margin: 1px; padding: 1px; border-radius: 5px; display: inline-block;}
 
-    .outer {margin: top; width: 200px; background: lightblue;position:absolute;top:250px; }
+    .outer {margin: top; width: 200px; background: lightblue;position:absolute;top:350px; }
 
     @viewport { width: 640;}
 
@@ -211,36 +211,30 @@
 
             <p style="font-family:verdana;text-align:center;font-size:20px">Total Coins</p>
               <div id="totalc">
-                <script>
-                function NewValue(moneyindex) {
-                  current = current + money[moneyindex];
-                    document.getElementById("totalc").innerHTML =  current;
-                }
-                </script>
+
              </div>
 
               <p style="font-family:verdana;text-align:center;font-size:20px">History</p>
+              <button  onclick="cancel() " style = "position: absolute; left: 150px; top:130px"> cancel </button>
 
               <div id='history'>
-                <script>
-
-                  function myFunction(num,moneyindex) {
-                    NewValue(moneyindex);
-                    document.getElementById("history").innerHTML =  arr[num];
-                  }
 
 
-                  </script>
+
               </div>
               </div>
 
               <script>
 
+            <!-- -->
 
               var n1 = (window.location.search.match(/[0-9]+/));
               var n = Number(n1);
 
               let current = n;
+              let lastadded = 0;
+              let historyvalue = [];
+              let historymsg = [];
 
 
 
@@ -267,6 +261,116 @@
 
 
 <!-- table for buttons -->
+<div class="popup" style= "width:119%">
+  <div class="blocker" onclick="hidePopup()"></div>
+  <div class="contents">
+  	<h1 style="font-family:verdana;font-size:180%;color:#EA9430;">How many times did you win?</h1>
+
+
+    <input type="number" id= "user_input" style="width:100px;height:20px;">
+    <input type="submit" onclick="winningtimes(x,y)" size="20%">
+
+  </div>
+</div>
+
+<style>
+  body {
+    text-align: center;
+  }
+  .popup { display: none; }
+  .popup.open { display: block; }
+
+  .blocker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 2000px;
+    height: 1500px;
+    content: ' ';
+    background: rgba(0,0,0,0.1);
+  }
+  .popup .contents {
+    border: 5px solid #F1AB59;
+    border-radius: 5px;
+    width: 300px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    background: #FFE6C9;
+
+    position: absolute;
+    top: 650px;
+    left: 970px;
+    transform: translate(-50%, -50%);
+  }
+
+</style>
+
+<script>
+
+function NewValue(lastadded) {
+  current = current + lastadded;
+    document.getElementById("totalc").innerHTML =  current;
+}
+
+
+function cancel() {
+  var index = historyvalue.length -1;
+  var lastvalue = historyvalue[index];
+  var lastmsg = historymsg[index];
+  var displaymsg = "CANCELED " + lastmsg + "\n" + " [-" + lastvalue + "]";
+  historyvalue.pop();
+  historymsg.pop();
+  NewValue(-lastvalue)
+  msg(displaymsg);
+}
+
+function msg(message) {
+  document.getElementById("history").innerHTML =  message;
+}
+
+function myFunction(num,moneyindex) {
+  lastadded = money[moneyindex];
+  historyvalue.push(lastadded);
+  historymsg.push(arr[num]);
+  NewValue(lastadded);
+  msg(arr[num]);
+}
+
+
+const popup = document.querySelector('.popup');
+
+let x = 0;
+let y = 0;
+
+function showPopup(m,n) {
+  x = m;
+  y = n;
+  popup.classList.add('open');
+}
+
+function hidePopup() {
+  popup.classList.remove('open');
+}
+
+function winningtimes(num,moneyindex) {
+  var money=[2000,1000,20,1500,800,10,500,1200,-2000,-1000,-500];
+
+  var wintimes = document.getElementById("user_input").value;
+  var times = Number(wintimes);
+  var addingamt = times * money[moneyindex];
+  historyvalue.push(addingamt);
+  historymsg.push(arr[num]);
+  NewValue(addingamt);
+  msg(arr[num]);
+  hidePopup();
+}
+
+
+
+</script>
 
 
               <p id="demo"></p>
@@ -281,7 +385,7 @@
               <button onclick="myFunction(1,1)" class="button button2" style = "position: absolute; left: 585px; top: 120px" >+1000 </button>
       </td>
       <td>
-              <button onclick="myFunction(3,2)" class="button button4" style = "position: absolute; left: 760px; top: 120px" >+20/win </button>
+              <button onclick="showPopup(3,2)" class="button button4" style = "position: absolute; left: 760px; top: 120px" >+20/win </button>
       </td>
       <td>
               <button onclick="myFunction(4,1)" class="button button5" style = "position: absolute; left: 865px; top: 120px" >+1000 </button>
@@ -304,10 +408,10 @@
     </tr>
     <tr>
       <td>
-              <button onclick="myFunction(34,2)" class="button button4" style = "position: absolute; left: 330px; top: 430px" >+20/win </button>
+              <button onclick="showPopup(34,2)" class="button button4" style = "position: absolute; left: 330px; top: 430px" >+20/win </button>
       </td>
       <td>
-              <button onclick="myFunction(11,2)" class="button button4" style = "position: absolute; left: 1470px; top: 430px" >+20/song </button>
+              <button onclick="showPopup(11,2)" class="button button4" style = "position: absolute; left: 1470px; top: 430px" >+20/song </button>
       </td>
     </tr>
     <tr>
@@ -321,12 +425,12 @@
               <button onclick="myFunction(31,7)" class="button button5" style = "position: absolute; left: 340px; top: 700px" >+1200 </button>
       </td>
       <td>
-              <button onclick="myFunction(14,2)" class="button button4" style = "position: absolute; left: 1470px; top: 700px" >+20/win </button>
+              <button onclick="showPopup(14,2)" class="button button4" style = "position: absolute; left: 1470px; top: 700px" >+20/win </button>
       </td>
     </tr>
     <tr>
       <td>
-              <button onclick="myFunction(30,2)" class="button button4" style = "position: absolute; left: 320px; top: 792px" >+20/item </button>
+              <button onclick="showPopup(30,2)" class="button button4" style = "position: absolute; left: 320px; top: 792px" >+20/item </button>
       </td>
     </tr>
     <tr>
@@ -340,7 +444,7 @@
               <button onclick="myFunction(28,1)" class="button button2" style = "position: absolute; left: 340px; top: 976px" >+1000 </button>
       </td>
       <td>
-              <button onclick="myFunction(17,5)" class="button button4" style = "position: absolute; left: 1470px; top: 976px" >+10/item </button>
+              <button onclick="showPopup(17,5)" class="button button4" style = "position: absolute; left: 1470px; top: 976px" >+10/item </button>
       </td>
     </tr>
 
@@ -349,7 +453,7 @@
               <button onclick="myFunction(25,6)" class="button button5" style = "position: absolute; left: 680px; top: 1200px" >+500 </button>
       </td>
       <td>
-              <button onclick="myFunction(24,2)" class="button button4" style = "position: absolute; left: 766px; top: 1200px" >+20/word </button>
+              <button onclick="showPopup(24,2)" class="button button4" style = "position: absolute; left: 766px; top: 1200px" >+20/word </button>
       </td>
       <td>
               <button onclick="myFunction(23,1)" class="button button2" style = "position: absolute; left: 868px; top: 1200px" >+1000 </button>
@@ -839,6 +943,92 @@ chance {
                             .joketile:hover {
                                 background: url("images/Impractical Joke1.png") no-repeat;
                             }
+                            .cnytile {
+                                  background: url("images/CNY.png") no-repeat;
+                                  margin: 0px;
+                              }
+                              .cnytile:hover {
+                                  background: url("images/CNY1.png") no-repeat;
+                              }
+                              .promotile {
+                                    background: url("images/MSL promo vid.png") no-repeat;
+                                    margin: 0px;
+                                }
+                                .promotile:hover {
+                                    background: url("images/MSL promo vid1.png") no-repeat;
+                                }
+                                .motortile {
+                                      background: url("images/Motor tour.png") no-repeat;
+                                      margin: 0px;
+                                  }
+                                  .motortile:hover {
+                                      background: url("images/Motor tour1.png") no-repeat;
+                                  }
+                                  .utowntile {
+                                        background: url("images/Tour around Utown.png") no-repeat;
+                                        margin: 0px;
+                                    }
+                                    .utowntile:hover {
+                                        background: url("images/Tour around Utown1.png") no-repeat;
+                                    }
+                                    .negarakutile {
+                                          background: url("images/Negaraku.png") no-repeat;
+                                          margin: 0px;
+                                      }
+                                      .negarakutile:hover {
+                                          background: url("images/Negaraku1.png") no-repeat;
+                                      }
+                                      .newstile {
+                                            background: url("images/IMDB spread around.png") no-repeat;
+                                            margin: 0px;
+                                        }
+                                        .newstile:hover {
+                                            background: url("images/IMDB spread around1.png") no-repeat;
+                                        }
+                                        .highpitchedtile {
+                                              background: url("images/High pitched.png") no-repeat;
+                                              margin: 0px;
+                                          }
+                                          .highpitchedtile:hover {
+                                              background: url("images/High pitched1.png") no-repeat;
+                                          }
+                                          .suspect1tile {
+                                                background: url("images/Suspect 1.png") no-repeat;
+                                                margin: 0px;
+                                            }
+                                            .suspect1tile:hover {
+                                                background: url("images/Suspect 1_1.png") no-repeat;
+                                            }
+                                            .suspect2tile {
+                                                  background: url("images/Suspect 2.png") no-repeat;
+                                                  margin: 0px;
+                                              }
+                                              .suspect2tile:hover {
+                                                  background: url("images/Suspect 2_1.png") no-repeat;
+                                              }
+                                              .suspect3tile {
+                                                    background: url("images/Suspect 3.png") no-repeat;
+                                                    margin: 0px;
+                                                }
+                                                .suspect3tile:hover {
+                                                    background: url("images/Suspect 3_1.png") no-repeat;
+                                                }
+                                                .suspect4tile {
+                                                      background: url("images/Suspect 4.png") no-repeat;
+                                                      margin: 0px;
+                                                  }
+                                                  .suspect4tile:hover {
+                                                      background: url("images/Suspect 4_1.png") no-repeat;
+                                                  }
+                                                  .suspect5tile {
+                                                        background: url("images/Suspect 5.png") no-repeat;
+                                                        margin: 0px;
+                                                    }
+                                                    .suspect5tile:hover {
+                                                        background: url("images/Suspect 5_1.png") no-repeat;
+                                                    }
+
+
 
 
 
@@ -861,16 +1051,19 @@ chance {
         </td>
 
         <td>
-          <a href = "#" target="_blank">
-            <img width = "100px" src= "images/CNY.png" style ="position: absolute;
-            top: 180px; left:576px; width: 92px;"/>
+          <a href = "https://www.youtube.com/watch?v=tvxeSFGik5A" target="_blank">
+            <div type="image" class=" tile cnytile cnytile.hover"
+            style ="position: absolute;
+            top: 180px; left:576px; width: 50px; height: 50px""> </div>
+
 
         </td>
 
         <td>
-            <input type="image" name="Suspect 1"
-           src= "images/Suspect 1.png" style ="position: absolute;
-            top: 180px; left:668px; width: 92px;"">
+          <div type="image" class=" tile suspect1tile suspect1tile.hover"
+          style ="position: absolute;
+          top: 180px; left:668px; width: 50px; height: 50px""> </div>
+
         </td>
 
         <td>
@@ -904,15 +1097,16 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
 
         <td>
           <a href = "#" target="_blank">
-            <img width = "100px" src= "images/MSL promo vid.png" style ="position: absolute;
-             top:180px; left:1125px; width: 92px;"/>
+            <div type="image" class=" tile promotile promotile.hover"
+            style ="position: absolute;
+            top: 180px; left:1125px; width: 50px; height: 50px""> </div>
 
         </td>
 
         <td>
-            <input type="image" name="Suspect 2"
-           src= "images/Suspect 2.png" style ="position: absolute;
-            top:180px; left:1217px; width: 92px;"">
+          <div type="image" class=" tile suspect2tile suspect2tile.hover"
+          style ="position: absolute;
+          top: 180px; left:1217px; width: 50px; height: 50px""> </div>
         </td>
 
         <td>
@@ -927,15 +1121,18 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
       <tr>
         <td>
           <a href = "https://www.youtube.com/watch?v=GXLBNJUOU5w" target="_blank">
-            <img width = "100px" src= "images/High pitched.png" style ="position: absolute;
-             top:316px; left:441px; width: 135px;"/>
+            <div type="image" class=" tile highpitchedtile highpitchedtile.hover"
+            style ="position: absolute;
+            top: 316px; left:441px; width: 80px; height: 50px""> </div>
+
           </a>
         </td>
 
         <td>
-          <a href = "https://www.youtube.com/watch?v=GXLBNJUOU5w" target="_blank">
-            <img width = "100px" src= "images/Motor tour.png" style ="position: absolute;
-             top:316px; left:1312px; width: 135px;"/>
+          <a href = "#" target="_blank">
+            <div type="image" class=" tile motortile motortile.hover"
+            style ="position: absolute;
+            top: 316px; left:1312px; width: 80px; height: 50px""> </div>
         </td>
       </tr>
 
@@ -958,9 +1155,9 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
 
       <tr>
         <td>
-            <input type="image" name="Suspect 5"
-           src= "images/Suspect 5.png" style ="position: absolute;
-            top:500px; left:441px; width: 135px;"">
+          <div type="image" class=" tile suspect5tile suspect5tile.hover"
+          style ="position: absolute;
+          top: 500px; left:441px; width: 80px; height: 50px""> </div>
         </td>
 
         <td>
@@ -1032,17 +1229,19 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
-            <input type="image" name="Suspect 3"
-           src= "images/Suspect 3.png" style ="position: absolute;
-            top:863px; left:1312px; width: 135px;"">
+          <div type="image" class=" tile suspect3tile suspect3tile.hover"
+          style ="position: absolute;
+          top: 863px; left:1312px; width: 80px; height: 50px""> </div>
         </td>
       </tr>
 
       <tr>
         <td>
           <a href = "https://www.youtube.com/watch?v=1ePFLkf0KMw" target="_blank">
-            <img width = "100px" src= "images/IMDB spread around.png" style ="position: absolute;
-             top:955px; left:441px; width: 135px;"/>
+            <div type="image" class=" tile newstile newstile.hover"
+            style ="position: absolute;
+            top: 955px; left:441px; width: 80px; height: 50px""> </div>
+
           </a>
         </td>
 
@@ -1084,8 +1283,10 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
 
         <td>
           <a href = "https://www.youtube.com/watch?v=g0moet-jLw8 " target="_blank">
-            <img width = "100px" src= "images/Negaraku.png" style ="position: absolute;
-             top:1047px; left:854px; width: 92px;"/>
+            <div type="image" class=" tile negarakutile negarakutile.hover"
+            style ="position: absolute;
+            top: 1047px; left:854px; width: 80px; height: 50px""> </div>
+
         </td>
 
         <td>
@@ -1102,15 +1303,17 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
-            <input type="image" name="Suspect 4"
-           src= "images/Suspect 4.png" style ="position: absolute;
-            top:1047px; left:1130px; width: 92px;">
+          <div type="image" class=" tile suspect4tile suspect4tile.hover"
+          style ="position: absolute;
+          top: 1047px; left:1130px; width: 80px; height: 50px""> </div>
         </td>
 
         <td>
           <a href = "#" target="_blank">
-            <img width = "100px" src= "images/Tour around Utown.png" style ="position: absolute;
-             top:1047px; left:1222px; width: 92px;"/>
+            <div type="image" class=" tile utowntile utowntile.hover"
+            style ="position: absolute;
+            top: 1047px; left:1222px; width: 80px; height: 50px""> </div>
+
         </td>
 
         <td>
