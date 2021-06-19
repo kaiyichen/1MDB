@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=480">
 
 <!-- style for buttons -->
+
+
     <style>
     .button {
       background-color: #4CAF50; /* Green */
@@ -76,6 +78,16 @@
 
     .button5:hover {
       background-color: #EA1313;
+      color: white;
+    }
+    .button6 {
+      background-color: white;
+      color: black;
+      border: 4px solid #861498;
+    }
+
+    .button6:hover {
+      background-color: #861498;
       color: white;
     }
 
@@ -172,7 +184,7 @@
             <div class='outer'>
               <div id="control">
 
-              <button id="roll" onclick="rollem()">Roll</button>
+              <button id="roll" onclick="rollem(),startTimer();">Roll</button>
               </div>
 
 
@@ -242,9 +254,9 @@
 
 
 
-            var arr = ["Welcome to SG","Happy Chinese New Year","Interview Suspect 1","Rock Scissors Paper","Singing","Chance","Dance","MSL promo vid","Suspect 2","SHN","Tour on motor","Arithmetric","Random no.generator","Special talent","Online Blackjack","Chance","Suspect 3","Category listing","Free pass","Tour around utown","Interview Suspect 4","Chance","Impractical Joke","Negaraku","Charades","Zoom Pose","Choose your suspect","Go to Quarantine","1MDB news","Share post","Household items","20 Pushups","Chance","Suspect 5","Guess song","High pitched","Chance - Earn 2000","Chance - Earn 1000","Chance - Earn 500","Chance - Lose 2000","Chance - Lose 1000","Chance - Lose 500"];
+            var arr = ["Welcome to SG","Happy Chinese New Year","Interviewed Suspect 1","Rock Scissors Paper","Singing","Chance","Dance","MSL promo vid","Interviewed Suspect 2","Paid 500 to get out of quarantine","Penang food in SG","Arithmetric","Random no.generator","Special talent","Online Blackjack","Chance","Interviewed Suspect 3","Category listing","Free pass","What RVRC students eat","Interviewed Suspect 4","Chance","Impractical Joke","Negaraku","Charades","Zoom Pose","Choose your suspect","Go to Quarantine","1MDB news","Share post","Household items","20 Pushups","Chance","Interviewed Suspect 5","Guess song","High pitched","Chance - Earn 2000","Chance - Earn 1000","Chance - Earn 500","Chance - Lose 2000","Chance - Lose 1000","Chance - Lose 500"];
 
-            var money=[2000,1000,20,1500,800,10,500,1200,-2000,-1000,-500];
+            var money=[2000,1000,20,1500,800,10,500,1200,-2000,-1000,-500,100];
 
 
 
@@ -356,7 +368,7 @@ function hidePopup() {
 }
 
 function winningtimes(num,moneyindex) {
-  var money=[2000,1000,20,1500,800,10,500,1200,-2000,-1000,-500];
+  var money=[2000,1000,20,1500,800,10,500,1200,-2000,-1000,-500,100];
 
   var wintimes = document.getElementById("user_input").value;
   var times = Number(wintimes);
@@ -385,6 +397,9 @@ function winningtimes(num,moneyindex) {
               <button onclick="myFunction(1,1)" class="button button2" style = "position: absolute; left: 585px; top: 120px" >+1000 </button>
       </td>
       <td>
+              <button onclick="myFunction(2,9) " class="button button6" style = "position: absolute; left: 675px; top: 120px" >-1000 </button>
+      </td>
+      <td>
               <button onclick="showPopup(3,2)" class="button button4" style = "position: absolute; left: 760px; top: 120px" >+20/win </button>
       </td>
       <td>
@@ -395,6 +410,12 @@ function winningtimes(num,moneyindex) {
       </td>
       <td>
               <button onclick="myFunction(7,1)" class="button button2" style = "position: absolute; left: 1135px; top: 120px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(8,9)" class="button button6" style = "position: absolute; left: 1225px; top: 120px" >-1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(9,10)" class="button button1" style = "position: absolute; left: 1720px; top: 310px" >GET OUT OF QUARANTINE! -500 </button>
       </td>
 
     </tr>
@@ -416,6 +437,14 @@ function winningtimes(num,moneyindex) {
     </tr>
     <tr>
       <td>
+              <button onclick="myFunction(33,9)" class="button button6" style = "position: absolute; left: 340px; top: 520px" >-1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(12,9)" class="button button6" style = "position: absolute; left: 1470px; top: 520px" >-1000 </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
               <button onclick="myFunction(13,4)" class="button button5" style = "position: absolute; left: 1470px; top: 610px" >+800 </button>
       </td>
     </tr>
@@ -425,7 +454,7 @@ function winningtimes(num,moneyindex) {
               <button onclick="myFunction(31,7)" class="button button5" style = "position: absolute; left: 340px; top: 700px" >+1200 </button>
       </td>
       <td>
-              <button onclick="showPopup(14,2)" class="button button4" style = "position: absolute; left: 1470px; top: 700px" >+20/win </button>
+              <button onclick="showPopup(14,11)" class="button button4" style = "position: absolute; left: 1470px; top: 700px" >+100/win </button>
       </td>
     </tr>
     <tr>
@@ -436,6 +465,9 @@ function winningtimes(num,moneyindex) {
     <tr>
       <td>
               <button onclick="myFunction(29,0)" class="button button5" style = "position: absolute; left: 340px; top: 884px" >+2000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(16,9)" class="button button6" style = "position: absolute; left: 1470px; top: 884px" >-1000 </button>
       </td>
     </tr>
 
@@ -450,6 +482,9 @@ function winningtimes(num,moneyindex) {
 
     <tr>
       <td>
+              <button onclick="myFunction(26,9)" class="button button6" style = "position: absolute; left: 590px; top: 1200px" >-1000 </button>
+      </td>
+      <td>
               <button onclick="myFunction(25,6)" class="button button5" style = "position: absolute; left: 680px; top: 1200px" >+500 </button>
       </td>
       <td>
@@ -462,7 +497,13 @@ function winningtimes(num,moneyindex) {
               <button onclick="myFunction(22,1)" class="button button5" style = "position: absolute; left: 950px; top: 1200px" >+1000 </button>
       </td>
       <td>
+              <button onclick="myFunction(20,9)" class="button button6" style = "position: absolute; left: 1140px; top: 1200px" >-1000 </button>
+      </td>
+      <td>
               <button onclick="myFunction(19,1)" class="button button2" style = "position: absolute; left: 1235px; top: 1200px" >+1000 </button>
+      </td>
+      <td>
+              <button onclick="myFunction(18,1)" class="button button1" style = "position: absolute; left: 1350px; top: 1200px" >+1000 </button>
       </td>
 
     </tr>
@@ -1041,11 +1082,13 @@ chance {
 
 </style>
 
+
 <!-- board element -->
+
     <table id= "board">
       <tr>
         <td>
-            <div type="image" class=" bigtile bigtile1 bigtile1.hover"
+            <div type="button" onclick="showPopout " class=" bigtile bigtile1"
             style ="position: absolute;
             top: 180px; left:440px; width: 50px; height: 50px""> </div>
         </td>
@@ -1060,6 +1103,7 @@ chance {
         </td>
 
         <td>
+          <a href = "Brenda.html" target="_blank">
           <div type="image" class=" tile suspect1tile suspect1tile.hover"
           style ="position: absolute;
           top: 180px; left:668px; width: 50px; height: 50px""> </div>
@@ -1081,7 +1125,7 @@ chance {
 
         <td>
           <a href = "
-https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] , Free puzzle hunt hints [+1 hint],Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
+https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] ,Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
             <img width = "100px" src= "images/Chance 1.png" style ="position: absolute;
             top: 180px; left:942px; width: 92px;"/>
 
@@ -1104,6 +1148,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
+          <a href = "Chris.html" target="_blank">
           <div type="image" class=" tile suspect2tile suspect2tile.hover"
           style ="position: absolute;
           top: 180px; left:1217px; width: 50px; height: 50px""> </div>
@@ -1129,7 +1174,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
-          <a href = "#" target="_blank">
+          <a href = "https://www.youtube.com/watch?v=LFj6COEGmTU" target="_blank">
             <div type="image" class=" tile motortile motortile.hover"
             style ="position: absolute;
             top: 316px; left:1312px; width: 80px; height: 50px""> </div>
@@ -1155,6 +1200,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
 
       <tr>
         <td>
+          <a href = "Kaiyi.html" target="_blank">
           <div type="image" class=" tile suspect5tile suspect5tile.hover"
           style ="position: absolute;
           top: 500px; left:441px; width: 80px; height: 50px""> </div>
@@ -1172,7 +1218,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
       <tr>
         <td>
           <a href = "
-https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] , Free puzzle hunt hints [+1 hint],Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
+https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] ,Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
             <img width = "100px" src= "images/Chance 4.png" style ="position: absolute;
             top: 590px; left:441px; width: 135px;"/>
 
@@ -1213,7 +1259,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
 
         <td>
           <a href = "
-        https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] , Free puzzle hunt hints [+1 hint],Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
+        https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] ,Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
             <img width = "100px" src= "images/Chance 2.png" style ="position: absolute;
             top: 770px; left:1312px; width: 135px;"/>
 
@@ -1231,6 +1277,7 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
+          <a href = "ShiHong.html" target="_blank">
           <div type="image" class=" tile suspect3tile suspect3tile.hover"
           style ="position: absolute;
           top: 863px; left:1312px; width: 80px; height: 50px""> </div>
@@ -1293,26 +1340,28 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
 
         <td>
+          <a href = "https://miro.com/welcomeonboard/c2ZSSGp2dTZsMjlOVDh0Y2tnMGhqYzdleU9YZXFLZnd0dXYyTUVHSlJDVkJoUVZiQWhLT25zdGNuVjBrNlB6c3wzMDc0NDU3MzYwMzc1ODAyNzAw" target="_blank">
           <div type="image" class=" tile joketile joketile.hover"
           style ="position: absolute;
           top: 1047px; left:946px; width: 80px; height: 50px""> </div>
         </td>
         <td>
           <a href = "
-        https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] , Free puzzle hunt hints [+1 hint],Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
+        https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating on assignments! [-1000],5.0 CAP[2000]  ,Free COVID Vaccine [500],Got internship at JP Morgan[1000],Need special term to graduate [-1000] ,Won money from a poker game[1000],Lost money playing mahjong[-500] ,Caught for sexual misconduct [-2000],Appeal results [-1000], Did not win Shopee Giveaway[-500],Won Inter Hall Games for the sport[500]" target="_blank">
             <img width = "100px" src= "images/Chance 3.png" style ="position: absolute;
             top: 1047px; left:1038px; width: 92px;"/>
 
         </td>
 
         <td>
+          <a href = "ShuSheng.html" target="_blank">
           <div type="image" class=" tile suspect4tile suspect4tile.hover"
           style ="position: absolute;
           top: 1047px; left:1130px; width: 80px; height: 50px""> </div>
         </td>
 
         <td>
-          <a href = "#" target="_blank">
+          <a href = "https://www.youtube.com/watch?v=qWD-7stBio8" target="_blank">
             <div type="image" class=" tile utowntile utowntile.hover"
             style ="position: absolute;
             top: 1047px; left:1222px; width: 80px; height: 50px""> </div>
@@ -1326,7 +1375,6 @@ https://pickerwheel.com/emb?choices=COVID Sem (free SUs!) [500],Caught cheating 
         </td>
       </tr>
 
-      <body onload=loady()>
 
 
 
